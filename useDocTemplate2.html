@@ -258,6 +258,8 @@
         <script src="js/element-ui/index.js"></script>
         <script src="js/parent-api.js"></script><!-- parent API -->
         <script src="js/sal-components.js"></script><!-- parent API -->
+        <script src="js/ajax.js"></script><!-- ajax API -->
+        <script src="js/jquery.1.9.1.js"></script><!-- jquery API -->
         <script>
             //===============================================================
             new Vue({
@@ -407,7 +409,21 @@
                 },
                 methods: {
                     submitClick: function() {
-                        alert('submitClick');
+                        alert('submitClick-搜索');
+
+                        parent.api.openLoading(3000);// 开启全屏遮罩，十五秒自动关闭
+                        //不可以跨域
+                        ajax.post('http://116.236.113.242:2006/api/Account/Login',{loginName:'shnhshare',loginPwd:'e10adc3949ba59abbe56e057f20f883e'},function(result){
+                            parent.api.showMsg(result);// 提示消息
+                            if(result.success){ // 请求成功
+                                console.log(result);
+                                // do something
+                            }else{ // 请求失败
+                                console.log(result);
+                                // do something
+                            }
+                        });//因为默认结果转换格式为json，因此可以省略不填
+
                     },
                     handleEdit: function(index, row) {
                         console.log(index, row);
@@ -424,6 +440,7 @@
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
                                 alert('submit!');
+                                api.showMsg('success',this.ruleForm.name, '保存成功！');
                             } else {
                                 console.log('error submit!!');
                                 return false;
