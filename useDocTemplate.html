@@ -403,7 +403,7 @@
                     },
                     submitForm(formName) {
                         console.log(this.ruleForm);
-                        alert('add 点击了确定!'+formName);
+                        alert('add 点击了确定!-'+this.ruleForm.name);
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
                                 alert('submit!');
