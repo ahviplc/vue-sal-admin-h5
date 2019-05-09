@@ -1,0 +1,220 @@
+html,
+body,
+#app {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	background-color: #FFFFFF;
+	overflow-x: hidden;
+}
+
+.tab-body .el-card__body {
+	padding: 0;
+	height: 100%;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+	width: 199px;
+	height: calc(100% - 40px);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.list {
+	max-height: calc(100% - 40px);
+}
+
+.el-menu-vertical-demo.el-menu--collapse {
+	height: calc(100% - 40px);
+}
+
+.left_box {
+	display: inline-block;
+	height: 100%;
+	transition: all .3s ease;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.logo_box {
+	overflow: hidden;
+	height: 40px;
+	padding: 0;
+	margin: 0;
+	border-right: 1px solid #e6e6e6;
+	background-repeat: no-repeat;
+	background-position-x: 14px;
+	font-size: 0;
+}
+
+.logo_box.is_not_nollapse {
+	padding-left: 16px;
+	background-image: url(../img/supalle_logo.png);
+}
+
+.logo_box.is_collapse {
+	text-align: center;
+	background-image: url(../img/supalle_logo_min.png);
+}
+
+.right_box {
+	width: calc(100% - 200px);
+	height: 100%;
+	display: inline-block;
+	background-color: #FFFFFF;
+	transition: width .3s;
+	top: 0;
+	left: 200px;
+	position: absolute;
+	transition: all .3s ease;
+	z-index: 0;
+}
+
+.right_box_full {
+	left: 65px;
+	width: calc(100% - 65px);
+}
+
+.nav_top {
+	clear: both;
+	height: 39px;
+	line-height: 38px;
+	border-bottom: solid 1px #E6E6E6;
+}
+
+.nav_top .left_item {
+	margin-left: 10px;
+}
+
+.nav_top .right_item {
+	margin-right: 10px;
+	float: right;
+}
+
+.right_body {
+	height: calc(100% - 40px);
+}
+
+.el-tabs.el-tabs--card {
+	height: 100%;
+}
+
+.el-tabs__item {
+	height: 39px;
+	line-height: 39px;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__nav {
+	border-top-width: 0;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active.is-closable {
+	background: #fff;
+}
+
+.el-tabs__header {
+	margin-bottom: 0;
+}
+
+.el-tabs .el-tabs__content {
+	height: calc(100% - 40px);
+}
+
+.el-tabs .el-tabs__content .el-tab-pane {
+	height: 100%;
+	width: 100%;
+}
+
+.right_shade {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, .3);
+	/* transition: z-index .1s linear .3s; */
+}
+
+@media screen and (max-width: 768px) {
+	.nav_top {
+		overflow: hidden;
+	}
+
+	.left_box_is_nollapse {
+		width: 0;
+	}
+
+	.right_box {
+		width: 100%;
+	}
+
+	.right_box_full {
+		left: 0;
+		width: 100%;
+	}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity .3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.xsl_tab_iframe {
+	border: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	display: block;
+}
+
+.font-size16 {
+	font-size: 16px;
+}
+
+.font-size18 {
+	font-size: 18px;
+}
+.font-size20 {
+	font-size: 20px;
+}
+.font-bolder {
+	font-weight: bolder;
+}
+
+@media screen and (min-width: 769px) {
+
+	/*滚动条样式*/
+	::-webkit-scrollbar {
+		/*滚动条整体样式*/
+		width: 4px;
+		/*高宽分别对应横竖滚动条的尺寸*/
+		height: 4px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		/*滚动条里面小方块*/
+		border-radius: 5px;
+		background: #9093995b;
+	}
+
+	::-webkit-scrollbar-track {
+		/*滚动条里面轨道*/
+		border-radius: 5px;
+		background: #DCDFE6;
+	}
+}

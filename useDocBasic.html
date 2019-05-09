@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p><i class="layui_icon layui_icon_read font-size18"></i>
+                    说明：当前框架主要使用有Vue、Element-UI、layui-icon，Ajax实现采用Fetch。</p>
+                <p>Vue：<a href="https://cn.vuejs.org/" target="_blank">https://cn.vuejs.org/</a></p>
+                <p>Element-UI：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank">http://element-cn.eleme.io/#/zh-CN</a></p>
+                <p>layui-icon：<a href="https://www.layui.com/doc/element/icon.html" target="_blank">https://www.layui.com/doc/element/icon.html</a></p>
+                <p>Fetch：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch</a></p>
+                <br />
+                <p>在tabs标签页内，调用父级页面API可以使用parent.api.xxx()调用；</p>
+                <p>也可以直接引入&nbsp;<span style="color: #67C23A;font-size: 13px;">&lt;script
+                        src="js/parent-api.js"&gt;&lt;/script&gt;</span>&nbsp;</p>
+                <p>&nbsp;&nbsp;以达到：api.xxx()直接调用，当然，我更推荐用第二种方式。</p>
+                <p>关于Layui-icon标签库，所有的减号(-)都替换成下划线即可正常使用。如：layui_icon layui_icon_add_circle</p>
+            </el-card>
+            <el-card class="box-card desc">
+                <p>提供tab子页面开发的资源：</p>
+                <p style="text-indent: 2em;">&lt;link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" /&gt;</p>
+                <p style="text-indent: 2em">&lt;link rel="stylesheet" href="css/layui-icon.css" /&gt;</p>
+                <p style="text-indent: 2em">&lt;link rel="stylesheet" href="css/tab-style.css" /&gt;</p>
+                <p style="text-indent: 2em">&lt;link rel="stylesheet" href="css/sal-components.css" /&gt;</p>
+                <p style="text-indent: 2em">&nbsp;</p>
+                <p style="text-indent: 2em">&lt;script src="js/gobal.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&lt;script src="js/vue.min.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&lt;script src="js/element-ui/index.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&lt;script src="js/parent-api.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&lt;script src="js/sal-components.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&nbsp;前面是忽悠你们的，目前的ajax还是依赖于jQuery，当然，使用接口不仅可以很方便的转换成Fetch，还能做插入一下自定义的操作，比如ajax时碰到了登录超时。</p>
+                <p style="text-indent: 2em">&lt;script src="js/jquery-1.9.1.min.js"&gt;&lt;/script&gt;</p>
+                <p style="text-indent: 2em">&lt;script src="js/ajax.js"&gt;&lt;/script&gt;</p>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/ajax.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                },
+                methods: {
+                    showMsgSuccess: function() {
+                        parent.api.showMsg('success', '000231', '这是一条成功的提示消息');
+                    },
+                    showMsgWarning: function() {
+                        parent.api.showMsg('warning', '000232', '这是一条警告的提示消息');
+                    },
+                    showMsgInfo: function() {
+                        parent.api.showMsg('info', '000233', '这是一条消息的提示消息');
+                    },
+                    showMsgError: function() {
+                        parent.api.showMsg('error', '000234', '这是一条错误的提示消息');
+                    },
+                    showMsgByHtml: function() {
+                        parent.api.showMsgByHtml('HTML 片段', '<strong>这是 <i>HTML</i> 片段</strong>');
+                    },
+                    openLoading: function() {
+                        parent.api.openLoading(2000);
+                    },
+                    jumpTab: function() {
+                        parent.api.jumpTab('newTabId', 'newTabTitle', 'newTitleUrl', 'newTitleIcon');
+                    },
+                    jumpTabParams: function() {
+                        parent.api.setTabParams('newTabParamsId', {
+                            oneParam: 'AA'
+                        });
+                        parent.api.jumpTab('newTabParamsId', 'newTabParamsTitle', 'newTabParamsUrl.html',
+                            'newTabIcon');
+                    },
+                    jumpAjaxTab: function() {
+                        parent.api.jumpTab('Ajax_API', 'Ajax API', 'ajaxTest.html');
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

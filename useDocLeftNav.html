@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>左侧导航只需要往layout.js的Vue示例中的menuArr属性赋值就OK，格式如下：</p>
+                <textarea class="code_view" readonly rows="36">
+[{
+    key: 'usedoc',
+    title: '使用文档',
+    show: true,
+    url: 'usedoc.html',
+    icon: 'el-icon-document',
+    children: [{
+            key: 'useDocBasic',
+            title: '基础说明',
+            show: true,
+            url: 'useDocBasic.html',
+            icon: 'el-icon-tickets'
+        }, {
+            key: 'useDocLeftNav',
+            title: '左侧导航',
+            show: true,
+            url: 'useDocLeftNav.html',
+            icon: 'el-icon-news'
+        },
+        {
+            key: 'useDocShowMsg',
+            title: '提示框',
+            show: true,
+            url: 'useDocShowMsg.html',
+            icon: 'el-icon-news'
+        },
+        {
+            key: 'useDocShade',
+            title: '全屏遮罩',
+            show: true,
+            url: 'useDocShade.html',
+            icon: 'layui_icon layui_icon_menu_fill'
+        },
+        {
+            key: 'useDocTabs',
+            title: 'tabs交互',
+            show: true,
+            url: 'useDocTabs.html',
+            icon: 'layui_icon layui_icon_tabs'
+        },
+        {
+            key: 'useDocAjax',
+            title: 'Ajax',
+            show: true,
+            url: 'useDocAjax.html',
+            icon: 'el-icon-share'
+        },
+        {
+            key: 'useDocAccess',
+            title: '按钮权限控制',
+            show: true,
+            url: 'useDocAccess.html',
+            icon: 'layui_icon layui_icon_auz'
+        },
+        {
+            key: 'useDocLayout',
+            title: '常规布局',
+            show: true,
+            url: 'useDocLayout.html',
+            icon: 'layui_icon layui_icon_layouts'
+        },
+        {
+            key: 'useDocDataTable',
+            title: '数据表格',
+            show: true,
+            url: 'useDocDataTable.html',
+            icon: 'layui_icon layui_icon_table'
+        }, {
+            key: 'useDocDialog',
+            title: '表单弹窗',
+            show: true,
+            url: 'useDocDialog.html',
+            icon: 'layui_icon layui_icon_table'
+        },
+        {
+            key: 'useDocTemplate',
+            title: '基础示例',
+            show: true,
+            url: 'useDocTemplate.html',
+            icon: 'layui_icon layui_icon_template'
+        }
+    ]
+}]
+</textarea>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app'
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>按钮控制的简单实现：</p>
+                <p>这里省略因为引入了parent-api.js，因此省略了parent.：</p>
+                <template>
+                    <el-button plain v-if="api.cr('tianjia')"><i :class="api.cr('tianjia').icon"></i>{{api.cr('tianjia').title}}</el-button>
+                    <el-button plain v-if="btns.del"><i :class="btns.del.icon"></i>{{btns.del.title}}</el-button>
+                    <el-button plain v-if="btns.edit"><i :class="btns.edit.icon"></i>{{btns.edit.title}}</el-button>
+                    <el-button plain v-if="btns.read"><i :class="btns.read.icon"></i>{{btns.read.title}}</el-button>
+                </template>
+                <textarea class="code_view" readonly rows="56">
+<template>
+    &lt;--可以用这种方式，不需要再data里声明属性。--&gt;
+    <el-button plain v-if="api.cr('tianjia')"><i :class="api.cr('tianjia').icon"></i>{{api.cr('tianjia').title}}</el-button>
+    
+    &lt;--也可以用这种方式，性能更高，可读性也更高一些。--&gt;
+    <el-button plain v-if="btns.del"><i :class="btns.del.icon"></i>{{btns.del.title}}</el-button>
+    <el-button plain v-if="btns.edit"><i :class="btns.edit.icon"></i>{{btns.edit.title}}</el-button>
+    
+    &lt;--查看按钮因为不存在该资源，因此没有渲染。--&gt;
+    <el-button plain v-if="btns.read"><i :class="btns.read.icon"></i>{{btns.read.title}}</el-button>
+    
+</template>                    
+
+data: function() {
+    return {
+        btns: {
+            del: api.cr('xiugai'),
+            edit: api.cr('shanchu'),
+            read: api.cr('chakan')
+        }
+    }
+}
+
+-----------资源数据，实际上是从导航menuArr中查出来的-----------
+{
+    key: 'useDocAccess',
+    title: '按钮权限控制',
+    show: true,
+    url: 'useDocAccess.html',
+    icon: 'layui_icon layui_icon_auz',
+    children: [{
+            key: 'tianjia',
+            title: '添加',
+            url: 'tianjia.html',
+            icon: 'el-icon-circle-plus-outline'
+        },
+        {
+            key: 'xiugai',
+            title: '修改',
+            url: 'xiugai.html',
+            icon: 'el-icon-edit'
+        },
+        {
+            key: 'shanchu',
+            title: '删除',
+            url: 'shanchu.html',
+            icon: 'el-icon-circle-close-outline'
+        }
+    ]
+}
+                            </textarea>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('xiugai'),
+                            edit: api.cr('shanchu'),
+                            read: api.cr('chakan')
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

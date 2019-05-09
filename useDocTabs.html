@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>tabs标签页中打开页面：</p>
+                <template>
+                    <el-button plain @click="jumpTab">
+                        打开页面
+                    </el-button>
+                </template>
+                <textarea class="code_view" readonly rows="1">
+parent.api.jumpTab('newTabId','newTabTitle', 'newTabUrl','newTabIcon');</textarea>
+            </el-card>
+            <br />
+            <el-card class="box-card desc">
+                <p>tabs标签页中打开页面，并获取存储在父级页面中的参数：</p>
+                <template>
+                    <el-button plain @click="jumpTabParams">
+                        传递参数，并打开页面
+                    </el-button>
+                </template>
+                <textarea class="code_view" readonly rows="2">
+parent.api.setTabParams('newTabParamsId', {oneParam: 'AA'});
+parent.api.jumpTab('newTabParamsId','newTabParamsTitle', 'newTabParamsUrl.html','newTabIcon');</textarea>
+            </el-card>
+            <br />
+            <el-card class="box-card desc">
+                <p>tabs标签页中，设置关闭前函数：</p>
+                <template>
+                    <el-button plain @click="jumpTabCoseCallBack1">
+                        调用函数并继续关闭页面
+                    </el-button>
+                    <el-button plain @click="jumpTabCoseCallBack2">
+                        调用函数，中断关闭页面
+                    </el-button>
+                </template>
+                <textarea class="code_view" readonly rows="50">
+// 调用函数并继续关闭页面  子页面代码编写如下                   
+// console.log(api.getCurrTabRes(window));
+new Vue({
+    el: '#app',
+    data: function() {},
+    created: function() {
+        var _this = this;
+        // 获取当前tab对象
+        var currTabRes = api.getCurrTabRes(window);
+        // 设值关闭前调用的函数
+        currTabRes.callback = function(tab, chain) {
+            // 关闭前的操作
+            api.showMsg('success', 2001, '关闭页面成功');
+            
+            // 关闭当前页面
+            api.closeTab(tab);
+            
+            // 继续执行链，在一次关闭多个时，如正常关闭当前页面，则必须加上这句代码，使其他子页面也正常关闭
+            chain.next();
+        }
+    }
+});
+
+
+
+// 调用函数，中断关闭页面              
+// console.log(api.getCurrTabRes(window));
+new Vue({
+    el: '#app',
+    data: function() {},
+    created: function() {
+        var _this = this;
+        // 获取当前tab对象
+        var currTabRes = api.getCurrTabRes(window);
+        // 设值关闭前调用的函数
+        currTabRes.callback = function(tab, chain) {
+            // 关闭前的操作
+            api.showMsg('warning', 2002, '先保存数据，再关闭页面');
+            
+            // 不关闭当前页面
+            //api.closeTab(tab);
+            
+            // 停止执行链
+            // chain.next();
+        }
+    }
+});</textarea>
+            <p>关闭策略：</p>
+            <p style="text-indent: 2em;">关闭tab的时候，检查子页面有没有注册关闭函数，如果有函数，那么调用tab子页面内的自定义函数，把继续关闭或者取消关闭的权限交给子页面。</p>
+            <p style="text-indent: 2em;">关闭多个的情况下，从右边向左边依次关闭，当遇到有子页面需要触发函数时，则调用子页面的函数，把是否继续关闭的操作交给子页面，子页面操作完毕时，可以继续关闭还没有关闭的页面，如果还有函数，则重复之前的步骤。</p>
+            <p style="text-indent: 2em;">使用场景：比如某些页面被用户修改后未保存，可以提醒用户继续操作！</p>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                },
+                methods: {
+                    showMsgSuccess: function() {
+                        parent.api.showMsg('success', '000231', '这是一条成功的提示消息');
+                    },
+                    showMsgWarning: function() {
+                        parent.api.showMsg('warning', '000232', '这是一条警告的提示消息');
+                    },
+                    showMsgInfo: function() {
+                        parent.api.showMsg('info', '000233', '这是一条消息的提示消息');
+                    },
+                    showMsgError: function() {
+                        parent.api.showMsg('error', '000234', '这是一条错误的提示消息');
+                    },
+                    showMsgByHtml: function() {
+                        parent.api.showMsgByHtml('HTML 片段', '<strong>这是 <i>HTML</i> 片段</strong>');
+                    },
+                    openLoading: function() {
+                        parent.api.openLoading(2000);
+                    },
+                    jumpTab: function() {
+                        parent.api.jumpTab('newTabId', 'newTabTitle', 'newTitleUrl', 'newTitleIcon');
+                    },
+                    jumpTabParams: function() {
+                        parent.api.setTabParams('newTabParamsId', {
+                            oneParam: 'AA'
+                        });
+                        parent.api.jumpTab('newTabParamsId', 'newTabParamsTitle', 'newTabParamsUrl.html',
+                            'newTabIcon');
+                    },
+                    jumpAjaxTab: function() {
+                        parent.api.jumpTab('Ajax_API', 'Ajax API', 'ajaxTest.html');
+                    },
+                    jumpTabCoseCallBack1:function(){
+                        parent.api.jumpTab('jumpTabCoseCallBack1', '调用函数并继续关闭页面', 'jumpTabCoseCallBack1.html');
+                    },
+                    jumpTabCoseCallBack2:function(){
+                        parent.api.jumpTab('jumpTabCoseCallBack2', '调用函数，中断关闭页面', 'jumpTabCoseCallBack2.html');
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

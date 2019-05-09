@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>Ajax API：</p>
+                <template>
+                    <textarea class="code_view" readonly rows="30">
+
+GET请求：ajax.get(url, params, callback, dataType);
+
+POST请求：ajax.post(url, params, callback, dataType);
+
+PUT请求：ajax.put(url, params, callback, dataType);
+
+DELETE请求：ajax.del(url, params, callback, dataType);
+
+serialize工具方法：ajax.serialize(obj); 注意：不支持序列化 [{one: 'one'},{two: 'two'}] 这种数组对象格式。
+
+url         ：请求的地址
+params      ：请求参数
+callback    ：请求成功后的回调函数，会传入格式转换后的请求结果
+dataType    ：请求结果转换的格式，默认为'json'
+
+四种请求方式都是异步请求，且params默认经过serialize()函数序列化处理，因此传入参数对象时，无需手动调用，当然，手动序列化也支持。
+
+调用示例：
+
+    parent.api.openLoading(15000);// 开启全屏遮罩，十五秒自动关闭
+    ajax.post('http://www.baidu.com',{username:'lihua',password:'123456',interest:['篮球','足球','阅读']},function(result){
+            parent.api.showMsg(result);// 提示消息
+            if(result.success){ // 请求成功
+                // do something
+            }else{ // 请求失败
+                // do something
+            }
+    });//因为默认结果转换格式为json，因此可以省略不填
+
+            </textarea>
+                </template>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                },
+                methods: {
+                    showMsgSuccess: function() {
+                        parent.api.showMsg('success', '000231', '这是一条成功的提示消息');
+                    },
+                    showMsgWarning: function() {
+                        parent.api.showMsg('warning', '000232', '这是一条警告的提示消息');
+                    },
+                    showMsgInfo: function() {
+                        parent.api.showMsg('info', '000233', '这是一条消息的提示消息');
+                    },
+                    showMsgError: function() {
+                        parent.api.showMsg('error', '000234', '这是一条错误的提示消息');
+                    },
+                    showMsgByHtml: function() {
+                        parent.api.showMsgByHtml('HTML 片段', '<strong>这是 <i>HTML</i> 片段</strong>');
+                    },
+                    openLoading: function() {
+                        parent.api.openLoading(2000);
+                    },
+                    jumpTab: function() {
+                        parent.api.jumpTab('newTabId', 'newTabTitle', 'newTitleUrl', 'newTitleIcon');
+                    },
+                    jumpTabParams: function() {
+                        parent.api.setTabParams('newTabParamsId', {
+                            oneParam: 'AA'
+                        });
+                        parent.api.jumpTab('newTabParamsId', 'newTabParamsTitle', 'newTabParamsUrl.html',
+                            'newTabIcon');
+                    },
+                    jumpAjaxTab: function() {
+                        parent.api.jumpTab('Ajax_API', 'Ajax API', 'ajaxTest.html');
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

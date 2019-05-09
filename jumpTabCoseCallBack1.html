@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css">
+        <style>
+            .desc a {
+                color: #409EFF;
+                font-size: 14px;
+            }
+
+            .code_view {
+                margin-top: 10px;
+                width: calc(100% - 10px);
+                border: solid 1px #E6E6E6;
+                resize: none;
+                padding: 5px;
+                font-size: 13px;
+                color: #606266;
+                line-height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- http://element-cn.eleme.io/#/zh-CN/component/installation -->
+        <div id="app" v-clock>
+            <el-card class="box-card desc">
+                <p>调用函数并继续关闭页面</p>
+            </el-card>
+
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script>
+        <script>
+            // 调用函数并继续关闭页面  子页面代码编写如下                   
+            // console.log(api.getCurrTabRes(window));
+            new Vue({
+                el: '#app',
+                data: function() {},
+                created: function() {
+                    var _this = this;
+                    // 获取当前tab对象
+                    var currTabRes = api.getCurrTabRes(window);
+                    // 设值关闭前调用的函数
+                    currTabRes.callback = function(tab, chain) {
+                        // 关闭前的操作
+                        api.showMsg('success', 2001, '关闭页面成功');
+                        
+                        // 关闭当前页面
+                        api.closeTab(tab);
+                        
+                        // 继续执行链，在一次关闭多个时，如正常关闭当前页面，则必须加上这句代码，使其他子页面也正常关闭
+                        chain.next();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

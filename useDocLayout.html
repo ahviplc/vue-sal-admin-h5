@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>tab页面布局时，建议遵循以下格式：</p>
+                <textarea class="code_view" readonly rows="56">
+<div id="app" v-clock> <!-- 每个Vue示例都需要一个容器，必选 -->
+	<template> <!--// 在#app内第一层，来一个template，可选，但建议加上 -->
+    
+        <sal-base ref="salBase"> <!-- // base包装主体内容，组件必选，ref属性可选 -->
+        
+            <sal-tools-top> <!-- // 头部，组件必选 -->
+            
+                <sal-tools-top-left> <!-- 头部左侧按钮区域，右侧的“更多”按钮会自动渲染，组件必选 -->
+                    
+                    <!-- 这是加“新增”按钮的例子 -->
+                    <el-button size="mini"><i class="el-icon-circle-plus-outline"></i>新增</el-button>
+                
+                </sal-tools-top-left>
+                
+            </sal-tools-top>
+            
+            <sal-tools-layer @reset-click="resetClick"  @submit-click="submitClick"> <!-- 右侧工具浮窗，必选，reset-click：重置按钮事件，submit-click：搜索按钮事件 -->
+                
+                <sal-tools-layer-btns> <!-- 功能按钮区块，可选-->
+                    
+                    <sal-tools-layer-btn> <!-- 功能按钮，用于自动排列，每个功能按钮都用它包装一下-->
+                        
+                    	<el-button size="mini" type="primary">
+                    		<i class="layui_icon layui_icon_spread_left"></i>打印</el-button>
+                            
+                    </sal-tools-layer-btn>
+                    
+                </sal-tools-layer-btns>
+                
+                <sal-tools-layer-from> <!-- 筛选表单区块，必选-->
+                
+                    <el-form ref="seachForm"> <!-- 嵌入表单，ref建议加上-->
+                        
+                        <!-- 文本框示例-->
+                    	<el-form-item label="活动名称" size="mini">
+                    		<el-input v-model="searchData.name"></el-input>
+                    	</el-form-item>
+                        
+                        <!-- 下拉框示例 -->
+                    	<el-form-item label="审批人" size="mini" class="filter-pane-item">
+                    		<el-select v-model="searchData.man" placeholder="请选择">
+                    			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    			</el-option>
+                    		</el-select>
+                    	</el-form-item>
+                    </el-form>
+                </sal-tools-layer-from>
+            </sal-tools-layer>
+            
+            <sal-body> <!-- 主体内容展示区-->
+                
+            </sal-body>
+        </sal-base>       
+    </template>
+</div>
+</textarea>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

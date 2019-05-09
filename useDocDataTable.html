@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>数据表格参照Element-ui的el-table组件，需要注意的是，如果需要把列因屏幕小而自动排版到expand区块里，则在el-table-cloumn上加auto-expand属性，再在table中加上&lt;sal-table-auto-expands&gt;作为最后一个子节点。</p>
+                <textarea class="code_view" readonly rows="26">
+                    
+<el-table :data="tableData5" style="width: 100%" height="100%" ref="sass" border>
+    <el-table-column type="selection"></el-table-column>
+    <el-table-column label="商品 ID" prop="id">
+    </el-table-column>
+    <el-table-column label="父级" prop="id" auto-expand><!-- auto-expand列，父级表头的也加上去，当然他不会再expand中显示 -->
+        <el-table-column label="描述" prop="desc" auto-expand><!-- auto-expand列 -->
+        </el-table-column>
+        <el-table-column label="商品名称" prop="name" auto-expand><!-- auto-expand列 -->
+        </el-table-column>
+    </el-table-column>
+    <el-table-column label="操作" prop="name" auto-expand><!-- auto-expand列，slot块也可以自动排版到expand中去 -->
+        <template v-slot:default="props">
+            <el-button size="mini" @click="handleEdit(props.$index, props.row)">Edit</el-button>
+            <el-button size="mini" type="danger">Delete</el-button>
+        </template>
+    </el-table-column>
+    
+    <sal-table-auto-expands><!-- 放置它作为el-table的最后一个子节点-->
+    </sal-table-auto-expands>
+</el-table>
+</textarea>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

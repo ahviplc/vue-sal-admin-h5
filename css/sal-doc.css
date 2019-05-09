@@ -1,0 +1,32 @@
+.desc {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.desc p {
+    color: #393D49;
+    margin: 10px;
+}
+
+.desc a {
+    color: #409EFF;
+}
+
+.code_view {
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    border: solid 1px #E6E6E6;
+    resize: none;
+    padding: 5px;
+    font-size: 13px;
+    color: #606266;
+    line-height: 20px;
+}
+
+.el-card {
+    margin: 10px;
+}
+
+.el-card:first {
+    margin-top: 0;
+}

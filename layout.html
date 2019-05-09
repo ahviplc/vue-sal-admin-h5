@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<title>Supalle Layout</title>
+		<link rel="shortcut icon" href="img/supalle_logo_min.png" type="image/x-icon" />
+		<link rel="stylesheet" href="js/element-ui/theme-chalk/index.css">
+		<link rel="stylesheet" href="css/layui-icon.css">
+		<link rel="stylesheet" href="css/layout.css" />
+	</head>
+	<body v-clock>
+		<div id="app" v-clock>
+			<template>
+				<div class="left_box" :class="{left_box_is_nollapse:isCollapse }">
+					<h1 class="logo_box" :class="{is_not_nollapse:!isCollapse , is_collapse:isCollapse}" title="深圳市前海新丝路科技有限公司">
+						深圳市前海新丝路科技有限公司
+					</h1>
+					<el-menu ref="menu" :default-active="menuDefaultActive" class="el-menu-vertical-demo" @select="handleSelect"
+					 :collapse="isCollapse" :unique-opened="true">
+						<template v-for="item in menuArr">
+							<template v-if="item.show">
+								<el-submenu v-if="hasShowItem(item.children).length > 0" :index="item.key">
+									<template slot="title">
+										<i class="font-size18" :class="item.icon"></i>
+										<span slot="title">{{item.title}}</span>
+									</template>
+									<template v-for="child in hasShowItem(item.children)">
+										<template v-if="child.show">
+											<el-submenu v-if="hasShowItem(child.children).length > 0 " :index="child.key">
+												<template slot="title">
+													<i class="font-size18" :class="child.icon"></i>
+													<span slot="title">{{child.title}}</span>
+												</template>
+												<template v-for="c in hasShowItem(child.children)">
+													<el-menu-item :index="c.key" v-if="c.show">
+														<i class="font-size18" :class="c.icon"></i>
+														<span slot="title">{{c.title}}</span>
+													</el-menu-item>
+												</template>
+											</el-submenu>
+											<el-menu-item v-else :index="child.key">
+												<i class="font-size18" :class="child.icon"></i>
+												<span slot="title">{{child.title}}</span>
+											</el-menu-item>
+										</template>
+									</template>
+								</el-submenu>
+								<el-menu-item v-else :index="item.key">
+									<i class="font-size18" :class="item.icon"></i>
+									<span slot="title">{{item.title}}</span>
+								</el-menu-item>
+							</template>
+						</template>
+					</el-menu>
+
+				</div>
+				<div class="right_box" :class="{right_box_full:isCollapse}">
+					<div class="nav_top">
+						<span class="left_item">
+							<!-- <el-button title="展开/收起左侧导航" @click="isCollapse = !isCollapse" size="small"><i class="el-icon-menu"></i></el-button> -->
+							<el-button title="展开/收起左侧导航" @click="isCollapse = !isCollapse" size="small">
+								<i class="layui_icon" :class="{layui_icon_spread_left:isCollapse,layui_icon_shrink_right:!isCollapse}"></i>
+							</el-button>
+						</span>
+
+						<span class="right_item">
+							<el-dropdown>
+								<span class="el-dropdown-link">
+									Supalle<i class="el-icon-arrow-down el-icon--right"></i>
+								</span>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item>个人中心</el-dropdown-item>
+									<el-dropdown-item>修改密码</el-dropdown-item>
+									<el-dropdown-item divided>登出</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+						</span>
+						<span class="right_item">
+							<el-button type="text"><i class="el-icon-bell"></i></el-button>
+						</span>
+					</div>
+					<div class="right_body">
+						<el-tabs v-model="tabActive" type="card" @tab-remove="tabClose">
+							<el-tab-pane v-for="(item, index) in tabItems" :key="item.name" :label="item.title" :name="item.name"
+							 :closable="!item.notClosable"><span slot="label"><i :class="[item.icon]"></i>{{item.title}}</span>
+								<iframe :id="'iframe_'+item.name" :name="'iframe_name_'+item.name" class="xsl_tab_iframe" :src="item.url"></iframe>
+							</el-tab-pane>
+						</el-tabs>
+					</div>
+					<transition name="fade">
+						<div class="right_shade" v-show="!isCollapse && gobalParams.windowIsXs" @click="isCollapse = !isCollapse"></div>
+					</transition>
+				</div>
+
+
+				<!-- tabs右键菜单 -->
+				<transition name="fade">
+					<ul v-show="tabsPopper.isShow" class="el-dropdown-menu el-popper" id="dropdown-menu-20190222161055" style="transform-origin: center top 0px; z-index: 99999; position: absolute;"
+					 :style="{top: tabsPopper.top, left: tabsPopper.left}" x-placement="bottom-end">
+						<li tabindex="-1" class="el-dropdown-menu__item" @click="tabRefresh" style="text-align: center;"><i class="el-icon-refresh"
+							 style="font-weight: bold;color: #67C23A;"></i>&nbsp;刷新</li>
+						<li tabindex="-1" v-show="tabsPopper.id !== homeTab.name" class="el-dropdown-menu__item" @click="tabPosition"
+						 style="text-align: center;"><i class="el-icon-location" style="font-weight: bold;color: #409EFF;"></i>&nbsp;定位</li>
+						<li tabindex="-1" v-show="tabsPopper.id !== homeTab.name" class="el-dropdown-menu__item" @click="tabClose(tabsPopper.id)"
+						 style="text-align: center;"><i class="el-icon-close" style="font-weight: bold;color: #F56C6C;"></i>&nbsp;关闭</li>
+						<li tabindex="-1" class="el-dropdown-menu__item" @click="tabCloseRight">关闭右侧</li>
+						<li tabindex="-1" v-show="tabsPopper.id !== homeTab.name" class="el-dropdown-menu__item" @click="tabCloseAll">关闭全部</li>
+					</ul>
+				</transition>
+			</template>
+		</div>
+		<script src="js/jquery.1.9.1.js"></script>
+		<script src="js/gobal.js"></script> <!-- 全局js -->
+		<script src="js/ajax.js"></script> <!-- Ajax API -->
+		<script src="js/vue.min.js"></script>
+		<script src="js/element-ui/index.js"></script>
+        <script src="js/sal-chain.js"></script>
+		<script src="js/layout.js"></script><!-- Layout API -->
+	</body>
+</html>

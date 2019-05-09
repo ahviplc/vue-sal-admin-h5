@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css">
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-doc.css" />
+    </head>
+    <body>
+        <div id="app" v-clock>
+            <br />
+            <el-card class="box-card desc">
+                <p>弹窗中的表单，主要就是需要设置 label-position="top" ，其余的看你需要。</p>
+                <p>sal-dialog弹窗组件封装了el-dialog，最大宽度为660px，当屏幕分辨率小时，宽度会自动切换为330px。</p>
+                <p>visible属性需要绑定你在root节点设置的属性，内部已经帮你加了.sync</p>
+                <p>close-reset-ref的值为弹窗中你的表单的ref。</p>
+                <p>close 事件是关闭的时候调用的事件，如果你设置了close-reset-ref，那么，它会在调用你绑定的事件后帮你调用表单的resetFields()函数</p>
+                <p>submit 事件是确定按钮触发的事件</p>
+                <textarea class="code_view" readonly rows="26">
+                    
+<sal-dialog title="自定义对话框" :visible="dialogVisible" @close="dialogVisible = false" close-reset-ref="ruleForm"
+    @submit="submitForm('ruleForm')"> <!-- 主要就是这个组件 -->
+    
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="top" size="mini" class="demo-ruleForm">
+        <el-form-item label="活动名称" prop="name">
+            <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域" prop="region">
+            <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="活动时间" required>
+            <el-col :span="11">
+                <el-form-item prop="date1">
+                    <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                </el-form-item>
+            </el-col>
+            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+            <el-col :span="11">
+                <el-form-item prop="date2">
+                    <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+                </el-form-item>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="即时配送" prop="delivery">
+            <el-switch v-model="ruleForm.delivery"></el-switch>
+        </el-form-item>
+        <el-form-item label="活动性质" prop="type">
+            <el-checkbox-group v-model="ruleForm.type">
+                <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+                <el-checkbox label="地推活动" name="type"></el-checkbox>
+                <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+                <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+            </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="特殊资源" prop="resource">
+            <el-radio-group v-model="ruleForm.resource">
+                <el-radio label="线上品牌商赞助"></el-radio>
+                <el-radio label="线下场地免费"></el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="活动形式" prop="desc">
+            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        </el-form-item>
+    </el-form>
+</sal-dialog>                  
+</textarea>
+            </el-card>
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        btns: {
+                            del: api.cr('apiceshixiugai'),
+                            edit: api.cr('apiceshishanchu'),
+                            read: api.cr('apiceshichakan')
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css">
+        <style>
+            .desc a {
+                color: #409EFF;
+                font-size: 14px;
+            }
+
+            .code_view {
+                margin-top: 10px;
+                width: calc(100% - 10px);
+                border: solid 1px #E6E6E6;
+                resize: none;
+                padding: 5px;
+                font-size: 13px;
+                color: #606266;
+                line-height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- http://element-cn.eleme.io/#/zh-CN/component/installation -->
+        <div id="app" v-clock>
+            <el-card class="box-card desc">
+                <p>tabs标签页中获取父级存储的参数只需要调用getTabParams(key)：</p>
+                <textarea class="code_view" readonly rows="20">
+parent.api.getTabParams('newTabParamsId').oneParam;
+
+本例代码：
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+
+        },
+        created: function() {
+            setTimeout(function() {
+                alert(parent.api.getTabParams('newTabParamsId').oneParam);
+            },500);
+        }
+    });
+</script>
+</textarea>
+            </el-card>
+
+        </div>
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: function() {
+
+                },
+                created: function() {
+                    setTimeout(function() {
+                        alert(parent.api.getTabParams('newTabParamsId').oneParam);
+                    },500);
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,166 @@
+@charset "utf-8";
+
+html,
+body,
+#app {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    font-size: 14px;
+}
+
+/* 内外边距通常让各个浏览器样式的表现位置不同 */
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+/* 去掉 table cell 的边距并让其边重合 */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 让链接在 hover 状态下显示下划线 */
+a:hover {
+    text-decoration: underline;
+}
+
+/* 默认不显示下划线，保持页面简洁 */
+ins,
+a {
+    text-decoration: none;
+}
+
+/* 去除 ie6 & ie7 焦点点状线 */
+a:focus,
+*:focus {
+    outline: none;
+}
+
+/* 清除浮动 */
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+    overflow: hidden;
+}
+
+.clearfix {
+    zoom: 1;
+    /* for ie6 & ie7 */
+}
+
+.clear {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+/* 设置显示和隐藏，通常用来与 js 配合 */
+.hide {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+/* 设置浮动，减少浮动带来的 bug */
+.fl,
+.fr {
+    display: inline;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.font-size12 {
+    font-size: 12px;
+}
+
+.font-size13 {
+    font-size: 13px;
+}
+
+.font-size14 {
+    font-size: 14px;
+}
+
+.font-size15 {
+    font-size: 15px;
+}
+
+.font-size16 {
+    font-size: 16px;
+}
+
+.font-size17 {
+    font-size: 17px;
+}
+
+.font-size18 {
+    font-size: 18px;
+}
+
+.font-size19 {
+    font-size: 19px;
+}
+
+.font-size20 {
+    font-size: 20px;
+}

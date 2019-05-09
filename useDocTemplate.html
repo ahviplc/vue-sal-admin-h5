@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+        <title>新丝路科技</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="js/element-ui/theme-chalk/index.css" />
+        <link rel="stylesheet" href="css/layui-icon.css" />
+        <link rel="stylesheet" href="css/tab-style.css" />
+        <link rel="stylesheet" href="css/sal-components.css" />
+        <style>
+
+        </style>
+    </head>
+    <body v-clock>
+        <div id="app" v-clock>
+            <template>
+                <sal-base ref="salBase">
+                    <sal-tools-top>
+                        <sal-tools-top-left>
+                            <el-button size="mini" @click="dialogVisible = true"><i class="el-icon-circle-plus-outline"></i>新增</el-button>
+                        </sal-tools-top-left>
+                    </sal-tools-top>
+                    <sal-tools-layer @submit-click="submitClick">
+                        <sal-tools-layer-btns>
+                            <sal-tools-layer-btn>
+                                <el-button size="mini" type="primary">
+                                    <i class="layui_icon layui_icon_spread_left"></i>打印</el-button>
+                            </sal-tools-layer-btn>
+                            <sal-tools-layer-btn>
+                                <el-button size="mini" type="primary">
+                                    <i class="layui_icon layui_icon_spread_left"></i>导入</el-button>
+                            </sal-tools-layer-btn>
+                            <sal-tools-layer-btn>
+                                <el-button size="mini" type="primary">
+                                    <i class="layui_icon layui_icon_spread_left"></i>导出</el-button>
+                            </sal-tools-layer-btn>
+                            <sal-tools-layer-btn>
+                                <el-button size="mini" type="primary">
+                                    <i class="layui_icon layui_icon_spread_left"></i>生成划款指令</el-button>
+                            </sal-tools-layer-btn>
+                        </sal-tools-layer-btns>
+                        <sal-tools-layer-from>
+                            <el-form size="mini">
+                                <el-form-item label="活动名称" size="mini">
+                                    <el-input v-model="formInline.user"></el-input>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini">
+                                    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini">
+                                    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+
+                                <el-form-item label="审批人" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="审批人last" size="mini" class="filter-pane-item">
+                                    <el-select v-model="value" placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-form>
+                        </sal-tools-layer-from>
+                    </sal-tools-layer>
+                    <sal-body>
+                        <el-table :data="tableData5" style="width: 100%" height="100%" ref="sass" border>
+                            <el-table-column type="selection"></el-table-column>
+                            <el-table-column label="商品 ID" prop="id">
+                            </el-table-column>
+                            <el-table-column label="商品名称" prop="name">
+                            </el-table-column>
+                            <el-table-column label="店家" prop="shop">
+                            </el-table-column>
+                            <el-table-column label="店家 ID" prop="shopId" auto-expand>
+                            </el-table-column>
+                            <el-table-column label="父级" prop="id" auto-expand>
+                                <el-table-column label="类别" prop="category" auto-expand>
+                                </el-table-column>
+                                <el-table-column label="描述" prop="desc" auto-expand>
+                                </el-table-column>
+                                <el-table-column label="地址" prop="address" auto-expand>
+                                </el-table-column>
+                            </el-table-column>
+                            <el-table-column label="操作" prop="name" auto-expand>
+                                <template v-slot:default="props">
+                                    <el-button size="mini" @click="handleEdit(props.$index, props.row)">Edit</el-button>
+                                    <el-button size="mini" type="danger"  @click="handleDel(props.$index, props.row)">Delete</el-button>
+                                </template>
+                            </el-table-column>
+                            <sal-table-auto-expands>
+                            </sal-table-auto-expands>
+                        </el-table>
+                    </sal-body>
+                </sal-base>
+
+                <el-dialog title="收货地址" :visible.sync="dialogFormVisible" custom-class="sal-custom-class	" :modal="false"
+                    width="660px" top="10vh">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="top" size="mini"
+                        label-width="100px" class="demo-ruleForm">
+                        <el-form-item label="活动名称" prop="name">
+                            <el-input v-model="ruleForm.name"></el-input>
+                        </el-form-item>{{ruleForm.name}}}
+                        <el-form-item label="活动区域" prop="region">
+                            <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="活动时间" required>
+                            <el-col :span="11">
+                                <el-form-item prop="date1">
+                                    <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                                </el-form-item>
+                            </el-col>
+                            <el-col class="line" :span="2">-</el-col>
+                            <el-col :span="11">
+                                <el-form-item prop="date2">
+                                    <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+                                </el-form-item>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label="即时配送" prop="delivery">
+                            <el-switch v-model="ruleForm.delivery"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="活动性质" prop="type">
+                            <el-checkbox-group v-model="ruleForm.type">
+                                <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+                                <el-checkbox label="地推活动" name="type"></el-checkbox>
+                                <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+                                <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                        <el-form-item label="特殊资源" prop="resource">
+                            <el-radio-group v-model="ruleForm.resource">
+                                <el-radio label="线上品牌商赞助"></el-radio>
+                                <el-radio label="线下场地免费"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="活动形式" prop="desc">
+                            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer">
+                        <el-button size="mini" @click="$emit('submit')">取 消</el-button>
+                        <el-button size="mini" type="primary" @click="$emit('submit')">立即创建</el-button>
+                        <el-button size="mini" @click="resetForm('ruleForm')">重置</el-button>
+                    </div>
+                </el-dialog>
+                <sal-dialog title="自定义对话框" :visible="dialogVisible" @close="dialogVisible = false" close-reset-ref="ruleForm"
+                    @submit="submitForm('ruleForm')">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="top" size="mini" class="demo-ruleForm">
+                        <el-form-item label="活动名称" prop="name">
+                            <el-input v-model="ruleForm.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="活动区域" prop="region">
+                            <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="活动时间" required>
+                            <el-col :span="11">
+                                <el-form-item prop="date1">
+                                    <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                                </el-form-item>
+                            </el-col>
+                            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+                            <el-col :span="11">
+                                <el-form-item prop="date2">
+                                    <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+                                </el-form-item>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label="即时配送" prop="delivery">
+                            <el-switch v-model="ruleForm.delivery"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="活动性质" prop="type">
+                            <el-checkbox-group v-model="ruleForm.type">
+                                <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+                                <el-checkbox label="地推活动" name="type"></el-checkbox>
+                                <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+                                <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                        <el-form-item label="特殊资源" prop="resource">
+                            <el-radio-group v-model="ruleForm.resource">
+                                <el-radio label="线上品牌商赞助"></el-radio>
+                                <el-radio label="线下场地免费"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="活动形式" prop="desc">
+                            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </sal-dialog>
+            </template>
+        </div>
+
+        <script src="js/gobal.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/element-ui/index.js"></script>
+        <script src="js/parent-api.js"></script><!-- parent API -->
+        <script src="js/sal-components.js"></script><!-- parent API -->
+        <script>
+            //===============================================================
+            new Vue({
+                el: '#app',
+                data: function() {
+                    return {
+                        winIsXs: gobal.params.windowIsXs,
+                        winHeight: gobal.params.windowFullHeight,
+                        formInline: {
+                            user: '',
+                            region: ''
+                        },
+                        options: [{
+                            value: '选项1',
+                            label: '黄金糕'
+                        }, {
+                            value: '选项2',
+                            label: '双皮奶'
+                        }, {
+                            value: '选项3',
+                            label: '蚵仔煎'
+                        }, {
+                            value: '选项4',
+                            label: '龙须面'
+                        }, {
+                            value: '选项5',
+                            label: '北京烤鸭'
+                        }],
+                        value: '',
+                        tableData5: [{
+                            id: '12987122',
+                            name: '好滋好味鸡蛋仔1',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987123',
+                            name: '好滋好味鸡蛋仔2',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987125',
+                            name: '好滋好味鸡蛋仔3',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987126',
+                            name: '好滋好味鸡蛋仔4',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }],
+                        dialogFormVisible: false,
+                        dialogVisible: false,
+                        ruleForm: {
+                            name: '',
+                            region: '',
+                            date1: '',
+                            date2: '',
+                            delivery: false,
+                            type: [],
+                            resource: '',
+                            desc: ''
+                        },
+                        rules: {
+                            name: [{
+                                    required: true,
+                                    message: '请输入活动名称',
+                                    trigger: 'blur'
+                                },
+                                {
+                                    min: 3,
+                                    max: 5,
+                                    message: '长度在 3 到 5 个字符',
+                                    trigger: 'blur'
+                                }
+                            ],
+                            region: [{
+                                required: true,
+                                message: '请选择活动区域',
+                                trigger: 'change'
+                            }],
+                            date1: [{
+                                type: 'date',
+                                required: true,
+                                message: '请选择日期',
+                                trigger: 'change'
+                            }],
+                            date2: [{
+                                type: 'date',
+                                required: true,
+                                message: '请选择时间',
+                                trigger: 'change'
+                            }],
+                            type: [{
+                                type: 'array',
+                                required: true,
+                                message: '请至少选择一个活动性质',
+                                trigger: 'change'
+                            }],
+                            resource: [{
+                                required: true,
+                                message: '请选择活动资源',
+                                trigger: 'change'
+                            }],
+                            desc: [{
+                                required: true,
+                                message: '请填写活动形式',
+                                trigger: 'blur'
+                            }]
+                        }
+                    }
+                },
+                computed: {
+                    // 计算属性的 getter
+                    layerFixed: function() {
+                        return !this.winIsXs && this.layerFixedBtn;
+                    }
+                },
+                created: function() {
+                    var _this = this;
+
+                },
+                mounted: function() {
+                    const _this = this;
+
+                },
+                updated: function() {
+
+                },
+                methods: {
+                    submitClick: function() {
+                        alert('submitClick');
+                    },
+                    handleEdit: function(index, row) {
+                        console.log(index, row);
+                        alert(index+'-'+row.name)
+                    },
+                    handleDel: function(index, row) {
+                        console.log(index, row);
+                        alert(index+'-'+row.name)
+                    },
+                    submitForm(formName) {
+                        console.log(this.ruleForm);
+                        alert('add 点击了确定!'+formName);
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                alert('submit!');
+                            } else {
+                                console.log('error submit!!');
+                                return false;
+                            }
+                        });
+                    },
+                    resetForm(formName) {
+                        this.$refs[formName].resetFields();
+                    },
+                    onClose() {
+                        console.log('root');
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
