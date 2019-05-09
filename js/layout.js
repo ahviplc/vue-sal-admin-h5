@@ -184,6 +184,13 @@ new Vue({
                             show: true,
                             url: 'useDocTemplate.html',
                             icon: 'layui_icon layui_icon_template'
+                        },
+                        {
+                            key: 'useDocTemplate2',
+                            title: '样板示例2',
+                            show: true,
+                            url: 'useDocTemplate2.html',
+                            icon: 'layui_icon layui_icon_template'
                         }
                     ]
                 }, {

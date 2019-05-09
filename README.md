@@ -1,6 +1,8 @@
-# sal
+# vue-sal-admin-h5 By LC
 
 #### 介绍
+vue-sal-admin-h5 By LC
+
 Supalle-Admin-Layout
 
 说明：当前框架主要使用有Vue、Element-UI、layui-icon，Ajax实现采用Fetch（是有这个打算，不过目前是jQuery。）。
@@ -36,6 +38,9 @@ http://supalle.gitee.io/sal
 # vue书写的admin后台管理系统模板
 #### 1.vue书写的admin后台管理系统模板
 #### 2.vue 好好学习她吧
+
+#### 3.Vue.js-教程 https://cn.vuejs.org/v2/guide/
+
 运行方法：
 > just run in server
 
