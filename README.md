@@ -32,3 +32,23 @@ http://supalle.gitee.io/sal
 ![image](http://supalle.gitee.io/sal/img/7.png)
 ![image](http://supalle.gitee.io/sal/img/8.png)
 ![image](http://supalle.gitee.io/sal/img/9.png)
+
+# vue书写的admin后台管理系统模板
+#### 1.vue书写的admin后台管理系统模板
+#### 2.vue 好好学习她吧
+运行方法：
+> just run in server
+
+**欢迎来到 [LC博客-一加壹博客最Top](http://www.oneplusone.vip)**
+
+**欢迎来到 [LC-Gitlab](https://gitlab.com/ahviplc)**
+
+**欢迎来到 [LC-Github](https://github.com/ahviplc)**
+
+**欢迎来到 [LC-Github-vue-sal-admin-h5](https://github.com/ahviplc/vue-sal-admin-h5)**
+
+> ### LC最寄语：永远不要放弃自己心中最初的最初的理想！~LC
+
+> from **2019年5月9日14:02:01**
+
+> to **the future**
