@@ -260,6 +260,8 @@
         <script src="js/sal-components.js"></script><!-- parent API -->
         <script src="js/ajax.js"></script><!-- ajax API -->
         <script src="js/jquery.1.9.1.js"></script><!-- jquery API -->
+        <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--> <!-- axios API -->
+        <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
         <script>
             //===============================================================
             new Vue({
@@ -412,17 +414,67 @@
                         alert('submitClick-搜索');
 
                         parent.api.openLoading(3000);// 开启全屏遮罩，十五秒自动关闭
+
                         //不可以跨域
-                        ajax.post('http://116.236.113.242:2006/api/Account/Login',{loginName:'shnhshare',loginPwd:'e10adc3949ba59abbe56e057f20f883e'},function(result){
-                            parent.api.showMsg(result);// 提示消息
-                            if(result.success){ // 请求成功
-                                console.log(result);
-                                // do something
-                            }else{ // 请求失败
-                                console.log(result);
-                                // do something
-                            }
-                        });//因为默认结果转换格式为json，因此可以省略不填
+                        // ajax.post('http://116.236.113.242:2006/api/Account/Login',{loginName:'shnhshare',loginPwd:'e10adc3949ba59abbe56e057f20f883e'},function(result){
+                        //     parent.api.showMsg(result);// 提示消息
+                        //     if(result.success){ // 请求成功
+                        //         console.log(result);
+                        //         // do something
+                        //     }else{ // 请求失败
+                        //         console.log(result);
+                        //         // do something
+                        //     }
+                        // });//因为默认结果转换格式为json，因此可以省略不填
+
+
+                        //get 1  不带参数
+                        // axios.get('http://www.wwtliu.com/sxtstu/blueberrypai/getIndexInteresting.php')
+                        //     .then(function (response) {
+                        //         console.log(response);
+                        //     })
+                        //     .catch(function (error) {
+                        //         console.log(error);
+                        //     });
+
+
+                         //get 2  带参数
+                         //   axios.get('https://api.apiopen.top/getSingleJoke',
+                         //       {
+                         //           params: {
+                         //               sid: 28654780
+                         //           }
+                         //       })
+                         //       .then(function (response) {
+                         //           console.log(response);
+                         //       })
+                         //       .catch(function (error) {
+                         //           console.log(error);
+                         //       });
+
+
+                         //post 1 不带参数
+                         // axios.post('http://meiriyikan.cn/api/json.php')
+                         //     .then(function (response) {
+                         //         console.log(response);
+                         //     })
+                         //     .catch(function (error) {
+                         //         console.log(error);
+                         //     });
+
+
+                        //post 2 带参数
+                        axios.post('https://api.apiopen.top/loginUser', {
+                            apikey:'d0058f79caae5300dcba65f128e52855',
+                            name:'peakchao',
+                            passwd:'123456'
+                           })
+                            .then(function (response) {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
 
                     },
                     handleEdit: function(index, row) {
