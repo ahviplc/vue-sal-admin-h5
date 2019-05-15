@@ -9,12 +9,18 @@
 <body>
 <div id="app">
     <aaa></aaa>
+    <p>{{ count }}-{{ returnVuexStoreMsg }}</p>
+    <p>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+        <button @click="changeMsg">change</button>
+    </p>
 </div>
 
 <div id="diy">
-<h1><a href="https://www.cnblogs.com/happ0/p/8075562.html" target="_blank">vue 生命周期 详解 - happy0 - 博客园</a></h1>
+    <h1><a href="https://www.cnblogs.com/happ0/p/8075562.html" target="_blank">vue 生命周期 详解 - happy0 - 博客园</a></h1>
     <img src="https://cn.vuejs.org/images/lifecycle.png" width="600px" height="1000px">
-console.log()日志如下：<br/>
+    console.log()日志如下：<br/>
 
 <textarea style="width: 1200px;height: 500px">
 
@@ -53,7 +59,12 @@ VueLifecycleDemo.html?_ijt=3csmfoveb5epurom9ifldvt5ed:116 destroyed:组件的数
 
 
 </body>
-<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!--<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>-->
+
+<!--引入vuex 【https://unpkg.com/vuex@3.1.1/dist/vuex.js】-->
+<script src="https://unpkg.com/vuex"></script>
 
 <script>
     //生命周期：初始化阶段 运行中阶段 销毁阶段
@@ -118,8 +129,44 @@ VueLifecycleDemo.html?_ijt=3csmfoveb5epurom9ifldvt5ed:116 destroyed:组件的数
         }
     })
 
+    //创建store
+    const store = new Vuex.Store({
+        state: {
+            count: 0 ,
+            vuexStoreMsg: 'LC'
+        },
+        mutations: {
+            increment: state => state.count++,
+            decrement: state => state.count--,
+            changeMsg: state => state.vuexStoreMsg = 'hello,LC-' + new Date()
+        }
+    })
 
-    new Vue({}).$mount('#app')
+    new Vue({
+        el: '#app',
+        computed: {
+            count () {
+                //通过computed 引用store
+                return store.state.count
+            },
+            returnVuexStoreMsg () {
+                //通过computed 引用store
+                return store.state.vuexStoreMsg
+            }
+        },
+        methods: {
+            increment () {
+                //通过commit执行变更
+                store.commit('increment')
+            },
+            decrement () {
+                store.commit('decrement')
+            },
+            changeMsg () {
+                store.commit('changeMsg')
+            }
+        }
+    }).$mount('#app')
 
 
 </script>
