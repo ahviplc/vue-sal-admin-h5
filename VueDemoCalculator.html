@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo 简易计算器</title>
+    <style>
+    </style>
+</head>
+<body>
+<div id="div1">
+    <input type="text" value="" v-model="n1">
+    <select name="myselect" v-model="opt">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" value="" v-model="n2">
+    <input type="button" value="=" @click="calc()">
+    <input type="text" value="" v-model="result">
+</div>
+
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: "#div1",
+        data: {
+            n1: 0,
+            n2: 0,
+            result: 0,
+            opt: "+"
+        },
+        methods: {
+            calc() {
+                //（======第一种写法 === === === =）
+                switch (this.opt) {
+                    case "+":
+                        this.result = parseInt(this.n1) + parseInt(this.n2);
+                        break;
+                    case "-":
+                        this.result = parseInt(this.n1) - parseInt(this.n2);
+                        break;
+                    case "*":
+                        this.result = parseInt(this.n1) * parseInt(this.n2);
+                        break;
+                    case "/":
+                        this.result = parseInt(this.n1) / parseInt(this.n2);
+                        break;
+                }
+                // （第二种写法，投机取巧的方法，正常开发中最好少用）
+                //   var codeStr = parseInt(this.n1) + this.opt + parseInt(this.n2);
+                //   this.result = eval(codeStr);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

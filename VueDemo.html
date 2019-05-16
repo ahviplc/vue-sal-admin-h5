@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo 跑马灯效果</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <input type="button" value="跑起来" id="btn1" @click="lang">
+    <input type="button" value="stop" id="btn2" @click="stop">
+    <br>
+    <h4>{{msg}}</h4>
+</div>
+
+<div id="div1">
+    <input type="button" value="跑起来" id="btn3" @click="lang">
+    <input type="button" value="stop" id="btn4" @click="stop">
+    <br>
+    <h4>{{msg}}</h4>
+</div>
+
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+    var wm = new Vue({
+            //el: "#div1",
+            data: {
+                msg: "昨天爱你，今天爱你，明天依然爱你！我的vue ! ~LC ",
+                intervalId: null
+            },
+            methods: {
+                lang() {
+                    if (this.intervalId != null) return;
+                    this.intervalId = setInterval(() => {
+                        var start = this.msg.substring(0, 1);
+                        var end = this.msg.substring(1);
+                        this.msg = end + start;
+                    }, 400)
+                },
+                stop() {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+            }
+        }
+    )//.$mount("#div1");
+
+    //或者使用
+    wm.$mount("#app");  //也可以
+</script>
+</body>
+</html>

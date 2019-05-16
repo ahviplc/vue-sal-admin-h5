@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vuex demo</title>
+</head>
+<body>
+
+<div id="app">
+    <p>{{ count }}-{{ returnVuexStoreMsg }}</p>
+    <p>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+        <button @click="changeMsg">change</button>
+    </p>
+</div>
+
+</body>
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!--<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>-->
+
+<!--引入vuex 【https://unpkg.com/vuex@3.1.1/dist/vuex.js】-->
+<script src="https://unpkg.com/vuex"></script>
+
+<script>
+
+    //创建store
+    const store = new Vuex.Store({
+        state: {
+            count: 0,
+            vuexStoreMsg: 'LC'
+        },
+        mutations: {
+            increment: state => state.count++,
+            decrement: state => state.count--,
+            changeMsg: state => state.vuexStoreMsg = 'hello,LC-' + new Date()
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        computed: {
+            count() {
+                //通过computed 引用store
+                return store.state.count
+            },
+            returnVuexStoreMsg() {
+                //通过computed 引用store
+                return store.state.vuexStoreMsg
+            }
+        },
+        methods: {
+            increment() {
+                //通过commit执行变更
+                store.commit('increment')
+            },
+            decrement() {
+                store.commit('decrement')
+            },
+            changeMsg() {
+                store.commit('changeMsg')
+            }
+        }
+    }).$mount('#app')
+
+
+</script>
+</html>

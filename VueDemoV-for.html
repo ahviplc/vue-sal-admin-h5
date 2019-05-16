@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo v-for中key的使用</title>
+    <style>
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div>
+        ID值：<input type="text" v-model="id">
+        Name: <input type="text" v-model="name">
+        <input type="button" value="增加" @click="add">
+    </div>
+
+    <p v-for="user in list" :key="user.id"><input type="checkbox">{{user.id}}==={{user.name}}</p>
+</div>
+
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: "#div1",
+        data: {
+            id: "",
+            name: "",
+            list: [
+                {id: 1, name: "周杰伦"},
+                {id: 2, name: "张杰"},
+                {id: 3, name: "王力宏"},
+                {id: 4, name: "林俊杰"},
+            ]
+        },
+        methods: {
+            add() {   // 添加方法
+                this.list.unshift({id: this.id, name: this.name})
+            }
+        }
+    })
+</script>
+</body>
+</html>
