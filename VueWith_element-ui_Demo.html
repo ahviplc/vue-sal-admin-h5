@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>element-ui示例demo</title>
-    <!-- 引入样式 -->
+    <!-- 引入样式 element-ui -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
@@ -254,12 +254,14 @@
 
     <el-divider><i class="el-icon-loading"></i></el-divider>
 
+    <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+
 </div>
 
 
 <!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<!-- 引入组件库 -->
+<!-- 引入组件库 element-ui -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 <!--具体逻辑层-->

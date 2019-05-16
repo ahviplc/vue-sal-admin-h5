@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="googlebot" content="noindex, nofollow"/>
+    <title>手机H5登录界面</title>
+
+    <script type="text/javascript" src=""></script>
+
+    <link rel="stylesheet" type="text/css" href="./css/login-style.css"/>
+
+    <!-- 引入样式 element-ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+<body>
+
+<div id="login_app">
+
+    <div class="mask"></div>
+    <div class="container">
+        <div class="login-wrapper">
+            <svg id="peak" viewBox="0 0 1024 1024">
+                <path fill="#FFF"
+                      d="M424 233.6L574.4 592c4.8 11.2 16 19.2 28.8 19.2h1.6c12.8 0 24-6.4 28.8-17.6l57.6-118.4 168 337.6H163.2l260.8-579.2m0-57.6c-6.4 0-11.2 3.2-14.4 9.6L113.6 846.4H912L704 433.6c-3.2-6.4-8-8-14.4-8-4.8 0-11.2 3.2-14.4 8l-73.6 147.2-163.2-395.2c-3.2-6.4-8-9.6-14.4-9.6z"></path>
+            </svg>
+            <div class="form-control">
+                <label>
+                    <input type="text" class="textfield" v-model="form.suId" id="suId" maxlength="32"/>
+                    <span class="suIdlabel">账户</span>
+                </label>
+            </div>
+            <div class="form-control">
+                <label>
+                    <input type="password" class="textfield" v-model="form.suPwd" id="suPwd" maxlength="32"/>
+                    <span class="passwordlabel">密码</span>
+                </label>
+            </div>
+            <br><br>
+            <!-- <button>Login</button> -->
+            <!-- <el-button type="text" @click="open2">Login</el-button>-->
+            <!-- <el-button :plain="true" @click="open2">Login</el-button>-->
+            <!-- <el-button type="success">Login</el-button>-->
+            <a @click="open2" class="button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Login
+            </a>
+            <br><br><br><br><br>
+            <!-- <a href="#findPassword" class="link">Forgot your password?</a>-->
+        </div>
+    </div>
+
+</div>
+</body>
+
+<!--<script type="application/javascript" src="./js/login.js"></script>-->
+
+<!-- 先引入 Vue 【https://unpkg.com/vue@2.6.10/dist/vue.js】 -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!--<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>-->
+
+<!--引入vuex 【https://unpkg.com/vuex@3.1.1/dist/vuex.js】-->
+<script src="https://unpkg.com/vuex"></script>
+
+<!-- 引入组件库 element-ui -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+    new Vue({
+        el: '#login_app',
+        data: function () {
+            return {
+                visible: false,
+                show: true,
+                form: {
+                    suId: '',
+                    suPwd: '',
+                    name: '',
+                    password: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                }
+            }
+        },
+        methods: {
+            open() {
+                this.$message('这是一条消息提示lc');
+            },
+            open2() {
+                this.$message({
+                    message: '恭喜你，这是一条成功消息lc' + this.form.suId,
+                    type: 'success',
+                    duration: 0,
+                    showClose: true
+                });
+            },
+
+            open3() {
+                this.$message({
+                    message: '警告哦，这是一条警告消息lc',
+                    type: 'warning',
+                    duration: 6000
+                });
+            },
+
+            open4() {
+                this.$message.error('错了哦，这是一条错误消息lc');
+            },
+
+            formSubmitOk() {
+                this.dialogFormVisible = false;
+                console.log('formSubmitOk-this form data:');
+                console.log(this.form);
+                this.$notify({
+                    title: '成功',
+                    message: '这是一条成功的提示消息-formSubmitOk-确定-' + this.form.name + '-' + this.form.region,
+                    type: 'success'
+                });
+            }
+        },
+        mounted() {
+
+            var label_suid = document.getElementsByClassName('suIdlabel')[0];
+            console.log(label_suid);
+            var label_password = document.getElementsByClassName('passwordlabel')[0];
+            console.log(label_password);
+
+            this.$nextTick(() => {
+                document.getElementById('suId').addEventListener('blur', () => {
+                    // alert('suId');
+                    if (this.form.suId) {
+                        label_suid.className = 'labelactive';
+                        console.log(label_suid);
+                    } else {
+                        label_suid.className = '';
+                        console.log(label_suid);
+                    }
+                })
+            }),
+            this.$nextTick(() => {
+                document.getElementById('suPwd').addEventListener('blur', () => {
+                    // alert('suPwd');
+                    if (this.form.suPwd) {
+                        label_password.className = 'labelactive';
+                        console.log(label_password);
+                    } else {
+                        label_password.className = '';
+                        console.log(label_password);
+                    }
+                })
+            })
+        }
+    })
+
+</script>
+</html>
+
