@@ -428,14 +428,14 @@
                         // });//因为默认结果转换格式为json，因此可以省略不填
 
 
-                        //get 1  不带参数
-                        // axios.get('http://www.wwtliu.com/sxtstu/blueberrypai/getIndexInteresting.php')
-                        //     .then(function (response) {
-                        //         console.log(response);
-                        //     })
-                        //     .catch(function (error) {
-                        //         console.log(error);
-                        //     });
+                        //get 1  不带参数  https://api.apiopen.top/getAllUrl   https://api.apiopen.top/getJoke
+                        axios.get('https://api.apiopen.top/getJoke')//获取笑话
+                            .then(function (response) {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
 
 
                          //get 2  带参数
